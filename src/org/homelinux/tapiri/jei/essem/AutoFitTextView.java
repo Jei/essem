@@ -43,7 +43,7 @@ private void refitText(String text, int textWidth, int textHeight) {
         this.getPaint().getTextBounds(text, 0 , text.length(), bounds);
         while ((trySize > minTextSize)
                 && ( (bounds.width() > availableWidth)
-                || ((bounds.height() * getOriginalLineCount()) > availableHeight) )) {
+                || ((this.getLineHeight() * getOriginalLineCount()) > availableHeight) )) {
             trySize -= 1;
             if (trySize <= minTextSize) {
                 trySize = minTextSize;

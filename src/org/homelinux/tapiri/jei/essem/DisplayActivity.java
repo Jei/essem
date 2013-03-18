@@ -1,6 +1,7 @@
 package org.homelinux.tapiri.jei.essem;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.text.TextUtils;
 import android.view.Display;
@@ -18,6 +19,8 @@ public class DisplayActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); 
         setContentView(R.layout.activity_display);
         
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        
         displayText = (AutoFitTextView) findViewById(R.id.displayText);
         
         // Get display sizes
@@ -28,7 +31,7 @@ public class DisplayActivity extends Activity {
 		int height = display.getHeight();
         
         // Set maximum text width accordingly
-        displayText.setMaxTextSize(width);
+        displayText.setMaxTextSize(Math.max(width, height));
         //displayText.setHorizontallyScrolling(true);
         displayText.setText(R.string.default_message);
     }
@@ -43,8 +46,12 @@ public class DisplayActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.menu_settings:
+        	getFragmentManager().beginTransaction()
+        		.replace(android.R.id.content, new Preferences())
+        		.commit();
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
     
