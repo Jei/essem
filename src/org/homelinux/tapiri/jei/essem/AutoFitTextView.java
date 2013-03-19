@@ -4,7 +4,6 @@ package org.homelinux.tapiri.jei.essem;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.EditText;
@@ -32,17 +31,14 @@ private void init() {
 
 private void refitText(String text, int textWidth, int textHeight) {
 	if (textWidth > 0) {
-		// Subtract a little extra space to avoid word wrapping
-        int availableWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight() - 80;
-        int availableHeight = textHeight - this.getPaddingTop() - this.getPaddingBottom() - 110;
+		// Subtract a little extra space to account for line height
+        int availableWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight();
+        int availableHeight = textHeight - this.getPaddingTop() - this.getPaddingBottom() - 20;
         float trySize = maxTextSize;
-        
-        Rect bounds = new Rect();
 
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
-        this.getPaint().getTextBounds(text, 0 , text.length(), bounds);
         while ((trySize > minTextSize)
-                && ( (bounds.width() > availableWidth)
+                && ( (this.getPaint().measureText(text) > availableWidth)
                 || ((this.getLineHeight() * getOriginalLineCount()) > availableHeight) )) {
             trySize -= 1;
             if (trySize <= minTextSize) {
@@ -50,7 +46,6 @@ private void refitText(String text, int textWidth, int textHeight) {
                 break;
             }
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
-            this.getPaint().getTextBounds(text, 0 , text.length(), bounds);
         }
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
     }

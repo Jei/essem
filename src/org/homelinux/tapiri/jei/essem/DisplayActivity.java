@@ -3,8 +3,7 @@ package org.homelinux.tapiri.jei.essem;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.text.TextUtils;
-import android.view.Display;
+import android.graphics.Rect;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -24,15 +23,14 @@ public class DisplayActivity extends Activity {
         displayText = (AutoFitTextView) findViewById(R.id.displayText);
         
         // Get display sizes
-        Display display = getWindowManager().getDefaultDisplay(); 
-        @SuppressWarnings("deprecation")
-		int width = display.getWidth();
-        @SuppressWarnings("deprecation")
-		int height = display.getHeight();
+        Rect display = new Rect();
+        Window window= getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(display);
+        int width = display.width();
+        int height = display.height();
         
-        // Set maximum text width accordingly
+        // Set maximum text size accordingly
         displayText.setMaxTextSize(Math.max(width, height));
-        //displayText.setHorizontallyScrolling(true);
         displayText.setText(R.string.default_message);
     }
 
