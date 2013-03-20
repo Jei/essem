@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">eSseM</string>
@@ -7,5 +8,6 @@
     <string name="default_message">:-)</string>
     <string name="pref_display_title">Display Mode</string>
     <string name="pref_display_desc">Set the screen orientation. Current: </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

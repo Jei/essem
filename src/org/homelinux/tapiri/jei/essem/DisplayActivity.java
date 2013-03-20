@@ -1,14 +1,14 @@
 package org.homelinux.tapiri.jei.essem;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.app.Activity;
-import android.graphics.Rect;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
-public class DisplayActivity extends Activity {
+public class DisplayActivity extends FragmentActivity implements DisplayFragment.OnFragmentInteractionListener {
 	
 	private AutoFitTextView displayText;
 
@@ -19,19 +19,6 @@ public class DisplayActivity extends Activity {
         setContentView(R.layout.activity_display);
         
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        
-        displayText = (AutoFitTextView) findViewById(R.id.displayText);
-        
-        // Get display sizes
-        Rect display = new Rect();
-        Window window= getWindow();
-        window.getDecorView().getWindowVisibleDisplayFrame(display);
-        int width = display.width();
-        int height = display.height();
-        
-        // Set maximum text size accordingly
-        displayText.setMaxTextSize(Math.max(width, height));
-        displayText.setText(R.string.default_message);
     }
 
     @Override
@@ -46,11 +33,15 @@ public class DisplayActivity extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_settings:
         	getFragmentManager().beginTransaction()
-        		.replace(android.R.id.content, new Preferences())
+        		.replace(R.id.displayFragment, new Preferences())
         		.commit();
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void onFragmentInteraction(Uri uri) {
+    	
     }
     
 }
