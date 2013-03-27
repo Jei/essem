@@ -27,6 +27,7 @@ private void init() {
         maxTextSize = 30;
     }
     minTextSize = 20;
+    previousChars = 0;
 }
 
 private void refitText(String text, int textWidth, int textHeight) {
@@ -34,11 +35,12 @@ private void refitText(String text, int textWidth, int textHeight) {
 		// Subtract a little extra space to account for line height
         int availableWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight();
         int availableHeight = textHeight - this.getPaddingTop() - this.getPaddingBottom() - 20;
+        String largestLine = getLargestLine(text);
         float trySize = maxTextSize;
 
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
         while ((trySize > minTextSize)
-                && ( (this.getPaint().measureText(text) > availableWidth)
+                && ( (this.getPaint().measureText(largestLine) > availableWidth)
                 || ((this.getLineHeight() * getOriginalLineCount()) > availableHeight) )) {
             trySize -= 1;
             if (trySize <= minTextSize) {
@@ -48,6 +50,68 @@ private void refitText(String text, int textWidth, int textHeight) {
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
         }
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+    }
+}
+
+private void refitTextOnChanged(String text, int textWidth, int textHeight) {
+	if (textWidth > 0) {
+		// Subtract a little extra space to account for line height
+        int availableWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight();
+        int availableHeight = textHeight - this.getPaddingTop() - this.getPaddingBottom() - 20;
+        String largestLine = getLargestLine(text);
+        int currentChars = text.length();
+        
+		if (currentChars != previousChars) {
+			float trySize = this.getTextSize();
+			
+			if (currentChars > previousChars) {
+				while ((trySize > minTextSize)
+				&& ( (this.getPaint().measureText(largestLine) > availableWidth)
+				|| ((this.getLineHeight() * getOriginalLineCount()) > availableHeight) )) {
+					trySize -= 1;
+					if (trySize <= minTextSize) {
+						trySize = minTextSize;
+						this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+						break;
+					}
+					this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+				}
+			} else {
+				while ((trySize < maxTextSize)
+				&& (this.getPaint().measureText(largestLine) < availableWidth)
+				&& ((this.getLineHeight() * getOriginalLineCount()) < availableHeight) ) {
+					trySize += 1;
+					if (trySize >= maxTextSize) {
+						trySize = maxTextSize;
+						this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+						break;
+					}
+					this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+				}
+				// It's possible that the size of the text is now bigger than the available space
+				if ((this.getPaint().measureText(largestLine) > availableWidth)
+				|| ((this.getLineHeight() * getOriginalLineCount()) > availableHeight)) {
+					trySize-=1;
+					this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+				}
+			}
+			previousChars = currentChars;
+		} else {
+	        float trySize = maxTextSize;
+
+	        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+	        while ((trySize > minTextSize)
+	                && ( (this.getPaint().measureText(largestLine) > availableWidth)
+	                || ((this.getLineHeight() * getOriginalLineCount()) > availableHeight) )) {
+	            trySize -= 1;
+	            if (trySize <= minTextSize) {
+	                trySize = minTextSize;
+	                break;
+	            }
+	            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+	        }
+	        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+		}
     }
 }
 
@@ -62,8 +126,7 @@ private int getOriginalLineCount() {
 }
 
 // Get the line which has the largest area
-private String getLargestLine() {
-	String fullText = this.getText().toString();
+private String getLargestLine(String fullText) {
 	String largestLine = "";
 	String eol = System.getProperty("line.separator");
 	String[] lines = fullText.split(eol);
@@ -81,22 +144,22 @@ private String getLargestLine() {
 @Override
 protected void onTextChanged(final CharSequence text, final int start,
         final int before, final int after) {
-    refitText(getLargestLine(), this.getWidth(), this.getHeight());
+    refitTextOnChanged(this.getText().toString(), this.getWidth(), this.getHeight());
 }
 
 @Override
 protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     if ((w != oldw) || (h != oldh)) {
-        refitText(getLargestLine(), this.getWidth(), this.getHeight());
+        refitText(this.getText().toString(), this.getWidth(), this.getHeight());
     }
 }
 
 @Override
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-    int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-    refitText(getLargestLine(), parentWidth, parentHeight);
+    //int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+    //int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+    //refitText(this.getText().toString(), parentWidth, parentHeight);
 }
 
 public float getMinTextSize() {
@@ -117,5 +180,6 @@ public void setMaxTextSize(int minTextSize) {
 
 private float minTextSize;
 private float maxTextSize;
+private int previousChars;
 
 }

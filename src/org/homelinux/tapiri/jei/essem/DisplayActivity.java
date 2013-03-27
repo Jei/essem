@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.Window;
 
 public class DisplayActivity extends FragmentActivity implements DisplayFragment.OnFragmentInteractionListener {
-	
-	private AutoFitTextView displayText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
