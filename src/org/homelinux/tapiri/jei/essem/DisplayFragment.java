@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +89,11 @@ public class DisplayFragment extends Fragment {
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction(Uri uri);
+	}
+	
+	public static Fragment newInstance() {
+		DisplayFragment df = new DisplayFragment();
+		return df;
 	}
 
 }
