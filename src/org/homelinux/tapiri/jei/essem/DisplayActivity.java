@@ -5,14 +5,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
 public class DisplayActivity extends Activity implements DisplayFragment.OnFragmentInteractionListener {
-	
-	private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +23,6 @@ public class DisplayActivity extends Activity implements DisplayFragment.OnFragm
         ft.commit();
         
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     @Override
