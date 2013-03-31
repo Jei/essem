@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Fragment;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,9 +94,24 @@ public class DisplayFragment extends Fragment {
 		public void onFragmentInteraction(Uri uri);
 	}
 	
-	public static Fragment newInstance() {
-		DisplayFragment df = new DisplayFragment();
-		return df;
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateFromPreferences();
 	}
-
+	
+	// Get preferences values and update UI accordingly
+    private void updateFromPreferences() {
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+    	String displayMode = prefs.getString(Preferences.KEY_PREF_DISPLAY, "auto");
+    	
+    	if (displayMode.equals("auto")) {
+			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		} else if (displayMode.equals("portrait")) {
+			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else if (displayMode.equals("landscape")) {
+			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+    }
+	
 }

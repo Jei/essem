@@ -6,9 +6,9 @@
         <item >landscape</item>
     </string-array>
     <string-array name="prefDisplayArray">
-        <item >Auto</item>
-        <item >Portrait</item>
-        <item >Landscape</item>
+        <item >@string/display_auto</item>
+        <item >@string/display_portrait</item>
+        <item >@string/display_landscape</item>
     </string-array>
     
 </resources>
