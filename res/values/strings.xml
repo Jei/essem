@@ -4,13 +4,22 @@
     <string name="app_name">eSseM</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_erase">Erase Text</string>
     <string name="title_activity_display">eSseM</string>
     <string name="default_message">:-)</string>
     <string name="pref_display_title">Display Mode</string>
-    <string name="pref_display_desc">Set the screen orientation. Current: </string>
+    <string name="pref_display_desc">Set the screen orientation.\nCurrent:</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="display_auto">Automatic</string>
     <string name="display_portrait">Portrait</string>
     <string name="display_landscape">Landscape</string>
+    <string name="pref_padding_title">Padding</string>
+    <string name="pref_padding_desc_part1">Set the text padding.\nCurrent:</string>
+    <string name="pref_padding_desc_part2">\nMaximum:</string>
+    <string name="pref_padding_dialog_title">New padding</string>
+    <string name="pref_spell_title">Spell Check</string>
+    <string name="pref_spell_desc">Enable spell check</string>
+    <string name="error_padding_parse">Padding value not valid</string>
+    <string name="warning_padding_too_large">Padding value too large. Defaulting to maximum value</string>
 
 </resources>

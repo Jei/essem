@@ -6,6 +6,22 @@
 	    android:key="displayPref"
 	    android:defaultValue="auto"
 	    android:entries="@array/prefDisplayArray"
-	    android:entryValues="@array/prefDisplayValues" />"
-
+	    android:entryValues="@array/prefDisplayValues" />
+	<EditTextPreference
+	    android:title="@string/pref_padding_title"
+	    android:summary="@string/pref_padding_desc_part1"
+	    android:key="paddingPref"
+	    android:defaultValue="0"
+	    android:dialogTitle="@string/pref_padding_dialog_title"
+	    android:inputType="number"
+	    android:numeric="integer"
+	    android:maxLength="3" />
+	<!-- 
+	<CheckBoxPreference 
+	    android:title="@string/pref_spell_title"
+	    android:summary="@string/pref_spell_desc"
+	    android:key="spellPref"
+	    android:defaultValue="false" />
+	 -->
+	 
 </PreferenceScreen>

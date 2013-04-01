@@ -8,10 +8,12 @@ import android.preference.PreferenceManager;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -54,6 +56,11 @@ public class DisplayFragment extends Fragment {
         displayText.setMaxTextSize(Math.max(width, height));
         displayText.setText(R.string.default_message);
 		
+        // Set maximum padding in the shared preferences
+        // Max padding is based on minimum font size and screen size
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        int maxPadding = (Math.min(width, height))/2 - Math.round(displayText.getMinTextSize());
+        prefs.edit().putString(Preferences.KEY_PREF_MAX_PADDING, "" + maxPadding).commit();
 	}
 
 	@Override
@@ -104,7 +111,15 @@ public class DisplayFragment extends Fragment {
     private void updateFromPreferences() {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
     	String displayMode = prefs.getString(Preferences.KEY_PREF_DISPLAY, "auto");
+    	boolean spellcheckEnabled = prefs.getBoolean(Preferences.KEY_PREF_SPELL, false);
+    	int padding = 0;
+    	try {
+    		padding = Integer.parseInt(prefs.getString(Preferences.KEY_PREF_PADDING, "0"));
+    	} catch(NumberFormatException nfe) {
+    		Toast.makeText(getActivity(), getResources().getString(R.string.error_padding_parse), Toast.LENGTH_SHORT).show();
+    	}
     	
+    	// Set screen orientation
     	if (displayMode.equals("auto")) {
 			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		} else if (displayMode.equals("portrait")) {
@@ -112,6 +127,24 @@ public class DisplayFragment extends Fragment {
 		} else if (displayMode.equals("landscape")) {
 			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		}
+    	
+    	// TODO: Set spellcheck
+    	/*
+    	if (spellcheckEnabled) {
+    		displayText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE|InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+    	} else {
+    		displayText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+    	}
+    	displayText.setSingleLine(false);
+    	*/
+    	
+    	// Set padding
+    	displayText.setPadding(padding, padding, padding, padding);
+    }
+    
+    // Utility method to erase all the text from the AutoFitTextView
+    public void clearText() {
+    	displayText.setText("");
     }
 	
 }
