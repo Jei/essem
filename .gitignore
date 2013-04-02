@@ -1,0 +1,8 @@
+#output dir
+bin/
+
+#eclipse project files
+.settings/
+.classpath
+.project
+
