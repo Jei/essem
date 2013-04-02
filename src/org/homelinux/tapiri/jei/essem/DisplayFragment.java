@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 public class DisplayFragment extends Fragment {
 	
 	private AutoFitTextView displayText;
+	private boolean isFirstTimeFocused;
 
 	private OnFragmentInteractionListener mListener;
 
@@ -55,6 +59,23 @@ public class DisplayFragment extends Fragment {
         // Set maximum text size accordingly
         displayText.setMaxTextSize(Math.max(width, height));
         displayText.setText(R.string.default_message);
+        
+        // Set a focus change listener to erase text at first focus
+        displayText.setSelected(false);
+        displayText.clearFocus();
+        isFirstTimeFocused = true;
+        displayText.setOnFocusChangeListener(new OnFocusChangeListener() {
+        	@Override
+        	public void onFocusChange(View v, boolean hasFocus) {
+        	    if(hasFocus && isFirstTimeFocused){
+        	        clearText();
+        	        isFirstTimeFocused = false;
+        	        // Show input method
+        	        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        	        imm.showSoftInput(displayText, 0);
+        	    }
+        	}
+        });
 		
         // Set maximum padding in the shared preferences
         // Max padding is based on minimum font size and screen size

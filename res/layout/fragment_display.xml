@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
     tools:context=".DisplayFragment" >
 
     <org.homelinux.tapiri.jei.essem.AutoFitTextView
@@ -13,7 +16,6 @@
         android:background="@android:color/transparent"
         android:scrollHorizontally="true" >
 
-        <requestFocus />
     </org.homelinux.tapiri.jei.essem.AutoFitTextView>
    
 </RelativeLayout>
