@@ -1,3 +1,5 @@
+// Copyright (C) 2013 Andrea Jonus
+// See the LICENSE file for the full license notice
 package org.homelinux.tapiri.jei.essem;
 
 import android.content.SharedPreferences;
