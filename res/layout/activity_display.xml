@@ -1,20 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <org.homelinux.tapiri.jei.essem.AutoFitTextView
-        android:id="@+id/displayText"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:inputType="textMultiLine"
-        android:gravity="center"
-        android:background="@android:color/transparent"
-        android:scrollHorizontally="true" >
-
-        <requestFocus />
-    </org.homelinux.tapiri.jei.essem.AutoFitTextView>
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout" >
+    
+    <!-- fragment programmatically added to allow replacement -->
+    <!--<fragment android:name="org.homelinux.tapiri.jei.essem.DisplayFragment"
+            android:id="@+id/displayFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"  /> -->
 
 </RelativeLayout>

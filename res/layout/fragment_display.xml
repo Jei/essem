@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
+    tools:context=".DisplayFragment" >
+
+    <org.homelinux.tapiri.jei.essem.AutoFitTextView
+        android:id="@+id/displayText"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:inputType="textMultiLine"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:scrollHorizontally="true" >
+
+    </org.homelinux.tapiri.jei.essem.AutoFitTextView>
+   
+</RelativeLayout>

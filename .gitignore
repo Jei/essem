@@ -1,0 +1,9 @@
+#output dir
+bin/
+gen/
+
+#eclipse project files
+.settings/
+.classpath
+.project
+
