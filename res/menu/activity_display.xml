@@ -2,9 +2,9 @@
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="20"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/menu_erase"
         android:title="@string/menu_erase"
         android:orderInCategory="10"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom|withText"/>
 </menu>
