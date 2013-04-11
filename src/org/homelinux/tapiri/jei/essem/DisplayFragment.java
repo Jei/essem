@@ -134,7 +134,7 @@ public class DisplayFragment extends Fragment {
     private void updateFromPreferences() {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
     	String displayMode = prefs.getString(Preferences.KEY_PREF_DISPLAY, "auto");
-    	boolean spellcheckEnabled = prefs.getBoolean(Preferences.KEY_PREF_SPELL, false);
+    	boolean spellcheckEnabled = prefs.getBoolean(Preferences.KEY_PREF_SPELLCHECK, false);
     	int padding = 0;
     	try {
     		padding = Integer.parseInt(prefs.getString(Preferences.KEY_PREF_PADDING, "0"));
@@ -151,15 +151,13 @@ public class DisplayFragment extends Fragment {
 			this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		}
     	
-    	// TODO: Set spellcheck
-    	/*
+        // Set spell correction
     	if (spellcheckEnabled) {
-    		displayText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE|InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+    		displayText.setInputType(displayText.getInputType() & ~InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     	} else {
-    		displayText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+    		displayText.setInputType(displayText.getInputType()|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     	}
     	displayText.setSingleLine(false);
-    	*/
     	
     	// Set padding
     	displayText.setPadding(padding, padding, padding, padding);

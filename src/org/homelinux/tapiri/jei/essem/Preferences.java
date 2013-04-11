@@ -15,7 +15,7 @@ public class Preferences extends PreferenceFragment implements OnSharedPreferenc
 	public static final String KEY_PREF_DISPLAY = "displayPref";
 	public static final String KEY_PREF_PADDING = "paddingPref";
 	public static final String KEY_PREF_MAX_PADDING = "maxPaddingPref";
-	public static final String KEY_PREF_SPELL = "spellPref";
+	public static final String KEY_PREF_SPELLCHECK = "spellPref";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class Preferences extends PreferenceFragment implements OnSharedPreferenc
 	    		paddingValueInt = Integer.parseInt(sharedPreferences.getString(Preferences.KEY_PREF_PADDING, "0"));
 	    		maxPaddingInt = Integer.parseInt(sharedPreferences.getString(Preferences.KEY_PREF_MAX_PADDING, "0"));
 	    	} catch(NumberFormatException nfe) {
-	    		Toast.makeText(getActivity(), getResources().getString(R.string.error_padding_parse), Toast.LENGTH_SHORT).show();
+	    		Toast.makeText(getActivity(), getResources().getString(R.string.error_padding_parse), Toast.LENGTH_LONG).show();
 	    	}
 			// Check if entered value is greater than maximum padding
 			// If so, set it to maximum
