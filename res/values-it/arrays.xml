@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="prefDisplayValues">
+        <item >auto</item>
+        <item >portrait</item>
+        <item >landscape</item>
+    </string-array>
+    <string-array name="prefDisplayArray">
+        <item >@string/display_auto</item>
+        <item >@string/display_portrait</item>
+        <item >@string/display_landscape</item>
+    </string-array>
+    
+</resources>
