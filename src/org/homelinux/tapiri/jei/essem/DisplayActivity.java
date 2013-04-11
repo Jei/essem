@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -46,7 +47,9 @@ public class DisplayActivity extends Activity implements DisplayFragment.OnFragm
         case R.id.menu_settings:
         	// Hide soft keyboard
         	InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        	if (getCurrentFocus() != null) {
+        	    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        	}
         	FragmentTransaction ft = getFragmentManager().beginTransaction();
         	// If display fragment is visible, replace it with settings fragment
         	if (mDisplayFragment.isVisible()) {

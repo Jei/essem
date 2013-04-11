@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">eSseM</string>
+    <string name="hello_world">Ciao mondo!</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_erase">Cancella Testo</string>
+    <string name="title_activity_display">eSseM</string>
+    <string name="default_message">:-)</string>
+    <string name="pref_display_title">Orientamento Schermo</string>
+    <string name="pref_display_desc">Imposta l\'orientamento dello schermo.\nAttuale:</string>
+    <string name="display_auto">Automatico</string>
+    <string name="display_portrait">Ritratto</string>
+    <string name="display_landscape">Paesaggio</string>
+    <string name="pref_padding_title">Padding</string>
+    <string name="pref_padding_desc_part1">Imposta il padding del testo.\nAttuale:</string>
+    <string name="pref_padding_desc_part2">\nMassimo:</string>
+    <string name="pref_padding_dialog_title">Nuovo padding</string>
+    <string name="pref_spell_title">Controllo Ortografico</string>
+    <string name="pref_spell_desc">Abilita controllo ortografico</string>
+    <string name="error_padding_parse">Valore di padding non valido.</string>
+    <string name="warning_padding_too_large">Valore di padding troppo grande. Imposto il valore di default.</string>
+
+</resources>
