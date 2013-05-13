@@ -16,6 +16,7 @@ public class Preferences extends PreferenceFragment implements OnSharedPreferenc
 	public static final String KEY_PREF_PADDING = "paddingPref";
 	public static final String KEY_PREF_MAX_PADDING = "maxPaddingPref";
 	public static final String KEY_PREF_SPELLCHECK = "spellPref";
+	public static final String KEY_PREF_FONT = "fontPref";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

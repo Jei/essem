@@ -4,6 +4,7 @@ package org.homelinux.tapiri.jei.essem;
 
 import android.app.Activity;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -135,6 +136,7 @@ public class DisplayFragment extends Fragment {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
     	String displayMode = prefs.getString(Preferences.KEY_PREF_DISPLAY, "auto");
     	boolean spellcheckEnabled = prefs.getBoolean(Preferences.KEY_PREF_SPELLCHECK, false);
+        String newFontPath = prefs.getString(Preferences.KEY_PREF_FONT, "");
     	int padding = 0;
     	try {
     		padding = Integer.parseInt(prefs.getString(Preferences.KEY_PREF_PADDING, "0"));
@@ -161,6 +163,13 @@ public class DisplayFragment extends Fragment {
     	
     	// Set padding
     	displayText.setPadding(padding, padding, padding, padding);
+    	
+    	// Set font style
+    	// check if preference has been set before creating new typeface
+    	if (!newFontPath.equals("")) {
+    	    Typeface newFontTypeface = Typeface.createFromFile(newFontPath);
+    	    displayText.setTypeface(newFontTypeface);
+    	}
     }
     
     // Utility method to erase all the text from the AutoFitTextView
