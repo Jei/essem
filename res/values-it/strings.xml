@@ -18,6 +18,8 @@
     <string name="pref_padding_dialog_title">Nuovo padding</string>
     <string name="pref_spell_title">Controllo Ortografico</string>
     <string name="pref_spell_desc">Abilita controllo ortografico</string>
+    <string name="pref_font_title">Stile del Font</string>
+    <string name="pref_font_desc">Imposta lo stile del testo.</string>
     <string name="error_padding_parse">Valore di padding non valido.</string>
     <string name="warning_padding_too_large">Valore di padding troppo grande. Imposto il valore di default.</string>
 

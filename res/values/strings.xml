@@ -18,6 +18,8 @@
     <string name="pref_padding_dialog_title">New padding</string>
     <string name="pref_spell_title">Spell Check</string>
     <string name="pref_spell_desc">Enable spell check</string>
+    <string name="pref_font_title">Font Style</string>
+    <string name="pref_font_desc">Set the text typeface.</string>
     <string name="error_padding_parse">Padding value not valid</string>
     <string name="warning_padding_too_large">Padding value too large. Defaulting to maximum value.</string>
 

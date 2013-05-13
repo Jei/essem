@@ -21,5 +21,9 @@
 	    android:summary="@string/pref_spell_desc"
 	    android:key="spellPref"
 	    android:defaultValue="false" />
+	<org.homelinux.tapiri.jei.essem.FontPreference
+	    android:title="@string/pref_font_title"
+	    android:summary="@string/pref_font_desc"
+	    android:key="fontPref" />	
 	 
 </PreferenceScreen>
