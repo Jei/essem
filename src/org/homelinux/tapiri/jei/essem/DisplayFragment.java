@@ -165,8 +165,11 @@ public class DisplayFragment extends Fragment {
     	displayText.setPadding(padding, padding, padding, padding);
     	
     	// Set font style
-    	Typeface newFontTypeface = Typeface.createFromFile(newFontPath);
-    	displayText.setTypeface(newFontTypeface);
+    	// check if preference has been set before creating new typeface
+    	if (!newFontPath.equals("")) {
+    	    Typeface newFontTypeface = Typeface.createFromFile(newFontPath);
+    	    displayText.setTypeface(newFontTypeface);
+    	}
     }
     
     // Utility method to erase all the text from the AutoFitTextView
